@@ -10,7 +10,7 @@ class Solution:
   
     def count_set_bits_till_padav(self, n):
         x = self.get_most_significant_bit(n) - 1
-        return (x * (2**(x-1)))
+        return x * (2**(x-1))
 
     def count_most_significant_bit(self, n):
         i = self.get_most_significant_bit(n) - 1
