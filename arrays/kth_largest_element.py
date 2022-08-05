@@ -1,3 +1,6 @@
+from typing import List
+
+
 class MaxHeap:
     def __init__(self, max_size):
         self.heap = [max_size]
@@ -20,7 +23,6 @@ class MaxHeap:
         node = self.size
 
         while node > 1 and self.heap[node] > self.heap[self.get_parent(node)]:
-            print(f"parent of {node} is {self.get_parent(node)}")
             self.heap[node], self.heap[self.get_parent(node)] = self.heap[self.get_parent(node)], self.heap[node]
             node = self.get_parent(node)
 
@@ -59,15 +61,22 @@ class MaxHeap:
             node = child
 
 
+class Solution:
+    def getKthLargestElement(self, arr: List[int], k: int) -> int:
+        heap = MaxHeap(len(arr))
+
+        for element in arr:
+            heap.add_element(element)
+
+        for i in range(k-1):
+            heap.extract_max_element()
+
+        return heap.get_max_element()
+
+
 if __name__ == "__main__":
-    obj = MaxHeap(100)
-    #            2
-    #         /    \
-    #        3      4
-    #      /   \   /   \
-    #     5     6 7     8
-    obj.add_element(10)
-    obj.add_element(20)
-    obj.add_element(30)
-    obj.add_element(40)
-    breakpoint()
+    obj = Solution()
+    arr = [1, 2, 3, 4, 5]
+    k = 1
+    result = obj.getKthLargestElement(arr, 4)
+    print(f"result {result}")
